@@ -720,6 +720,7 @@ function buildQuiz(cat, count) {
 function Latihan({ progress, setBest }) {
   const [cat, setCat] = useState(null);
   const [count, setCount] = useState(10);
+  const [customCount, setCustomCount] = useState("");
   const [quiz, setQuiz] = useState(null);
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState(null);
@@ -741,13 +742,28 @@ function Latihan({ progress, setBest }) {
         <SectionHead jp="練習" title="Latihan" sub="Pilih jumlah soal & kategori. Soal selalu diacak setiap sesi." />
         <div style={{ marginBottom: 22 }}>
           <div style={{ fontFamily: FONT_BODY, fontSize: 11, color: C.indigo2, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 10 }}>Jumlah soal</div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
             {counts.map((n) => (
-              <button key={n} onClick={() => setCount(n)}
+              <button key={n} onClick={() => { setCount(n); setCustomCount(""); }}
                 style={{ fontFamily: FONT_BODY, fontSize: 14, minWidth: 52, padding: "9px 16px", borderRadius: 999, cursor: "pointer",
-                  border: `1px solid ${count === n ? C.indigo : C.line}`, background: count === n ? C.indigo : "transparent",
-                  color: count === n ? C.paper : C.indigo, transition: "all .15s" }}>{n}</button>
+                  border: `1px solid ${count === n && customCount === "" ? C.indigo : C.line}`, background: count === n && customCount === "" ? C.indigo : "transparent",
+                  color: count === n && customCount === "" ? C.paper : C.indigo, transition: "all .15s" }}>{n}</button>
             ))}
+            <input
+              type="number"
+              min={1}
+              inputMode="numeric"
+              placeholder="Custom"
+              value={customCount}
+              onChange={(e) => {
+                const v = e.target.value;
+                setCustomCount(v);
+                const num = parseInt(v, 10);
+                if (num > 0) setCount(num);
+              }}
+              style={{ fontFamily: FONT_BODY, fontSize: 14, width: 70, padding: "9px 12px", borderRadius: 999, textAlign: "center",
+                border: `1px solid ${customCount !== "" ? C.indigo : C.line}`, background: "transparent", color: C.indigo, outline: "none" }}
+            />
           </div>
         </div>
         <div style={{ fontFamily: FONT_BODY, fontSize: 11, color: C.indigo2, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 10 }}>Kategori</div>
