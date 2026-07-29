@@ -351,6 +351,51 @@ const GRAMMAR = [
   { pat: "疑問詞 (kata tanya)", mean: "なに・だれ・どこ・いつ・いくら", desc: "Kata tanya menggantikan bagian yang ditanyakan pada posisi yang sama, lalu tambahkan か. なに/なん = apa, だれ = siapa, どこ = di mana, いつ = kapan, いくら = berapa (harga), どうやって = bagaimana caranya.", ex: [ { jp: "これは なんですか。", ro: "kore wa nan desu ka.", id: "Ini apa?" }, { jp: "たんじょうびは いつですか。", ro: "tanjoubi wa itsu desu ka.", id: "Kapan ulang tahunmu?" }, { jp: "えきまで どうやって いきますか。", ro: "eki made dou yatte ikimasu ka.", id: "Bagaimana cara ke stasiun?" } ], quiz: { q: "「（　）が きましたか。」——「たなかさんです。」", opt: ["だれ", "どこ", "いつ", "なに"], ans: "だれ", why: "Jawabannya orang → kata tanya \"siapa\" = だれ." } },
 ];
 
+/* =========================== DATA: KONJUGASI KATA KERJA =========================== */
+const GROUP_INFO = {
+  godan: { label: "Godan (~u)", desc: "Verba kelompok 1. Bentuk ～te/～ta mengikuti akhiran kamus: う・つ・る → って/った, く → いて/いた (kecuali 行く → いって/いった), ぐ → いで/いだ, す → して/した, ぬ・ぶ・む → んで/んだ." },
+  ichidan: { label: "Ichidan (~ru)", desc: "Verba kelompok 2. Buang る lalu tambah langsung ます/て/た/ない: たべる → たべます／たべて／たべた／たべない." },
+  irregular: { label: "Tidak beraturan", desc: "する dan 来る (juga N + する) berubah di luar pola: する → します／して／した／しない, 来る → 来ます／来て／来た／来ない (baca: konai)." },
+};
+const VERB_CONJ = [
+  { kanji: "行く", kana: "いく", meaning: "pergi", group: "godan", masu: { k: "行きます", h: "いきます" }, te: { k: "行って", h: "いって" }, ta: { k: "行った", h: "いった" }, nai: { k: "行かない", h: "いかない" } },
+  { kanji: "書く", kana: "かく", meaning: "menulis", group: "godan", masu: { k: "書きます", h: "かきます" }, te: { k: "書いて", h: "かいて" }, ta: { k: "書いた", h: "かいた" }, nai: { k: "書かない", h: "かかない" } },
+  { kanji: "聞く", kana: "きく", meaning: "mendengar / bertanya", group: "godan", masu: { k: "聞きます", h: "ききます" }, te: { k: "聞いて", h: "きいて" }, ta: { k: "聞いた", h: "きいた" }, nai: { k: "聞かない", h: "きかない" } },
+  { kanji: "泳ぐ", kana: "およぐ", meaning: "berenang", group: "godan", masu: { k: "泳ぎます", h: "およぎます" }, te: { k: "泳いで", h: "およいで" }, ta: { k: "泳いだ", h: "およいだ" }, nai: { k: "泳がない", h: "およがない" } },
+  { kanji: "話す", kana: "はなす", meaning: "berbicara", group: "godan", masu: { k: "話します", h: "はなします" }, te: { k: "話して", h: "はなして" }, ta: { k: "話した", h: "はなした" }, nai: { k: "話さない", h: "はなさない" } },
+  { kanji: "貸す", kana: "かす", meaning: "meminjamkan", group: "godan", masu: { k: "貸します", h: "かします" }, te: { k: "貸して", h: "かして" }, ta: { k: "貸した", h: "かした" }, nai: { k: "貸さない", h: "かさない" } },
+  { kanji: "待つ", kana: "まつ", meaning: "menunggu", group: "godan", masu: { k: "待ちます", h: "まちます" }, te: { k: "待って", h: "まって" }, ta: { k: "待った", h: "まった" }, nai: { k: "待たない", h: "またない" } },
+  { kanji: "立つ", kana: "たつ", meaning: "berdiri", group: "godan", masu: { k: "立ちます", h: "たちます" }, te: { k: "立って", h: "たって" }, ta: { k: "立った", h: "たった" }, nai: { k: "立たない", h: "たたない" } },
+  { kanji: "買う", kana: "かう", meaning: "membeli", group: "godan", masu: { k: "買います", h: "かいます" }, te: { k: "買って", h: "かって" }, ta: { k: "買った", h: "かった" }, nai: { k: "買わない", h: "かわない" } },
+  { kanji: "会う", kana: "あう", meaning: "bertemu", group: "godan", masu: { k: "会います", h: "あいます" }, te: { k: "会って", h: "あって" }, ta: { k: "会った", h: "あった" }, nai: { k: "会わない", h: "あわない" } },
+  { kanji: "使う", kana: "つかう", meaning: "memakai", group: "godan", masu: { k: "使います", h: "つかいます" }, te: { k: "使って", h: "つかって" }, ta: { k: "使った", h: "つかった" }, nai: { k: "使わない", h: "つかわない" } },
+  { kanji: "手伝う", kana: "てつだう", meaning: "membantu", group: "godan", masu: { k: "手伝います", h: "てつだいます" }, te: { k: "手伝って", h: "てつだって" }, ta: { k: "手伝った", h: "てつだった" }, nai: { k: "手伝わない", h: "てつだわない" } },
+  { kanji: "座る", kana: "すわる", meaning: "duduk", group: "godan", masu: { k: "座ります", h: "すわります" }, te: { k: "座って", h: "すわって" }, ta: { k: "座った", h: "すわった" }, nai: { k: "座らない", h: "すわらない" } },
+  { kanji: "分かる", kana: "わかる", meaning: "mengerti", group: "godan", masu: { k: "分かります", h: "わかります" }, te: { k: "分かって", h: "わかって" }, ta: { k: "分かった", h: "わかった" }, nai: { k: "分からない", h: "わからない" } },
+  { kanji: "帰る", kana: "かえる", meaning: "pulang", group: "godan", masu: { k: "帰ります", h: "かえります" }, te: { k: "帰って", h: "かえって" }, ta: { k: "帰った", h: "かえった" }, nai: { k: "帰らない", h: "かえらない" } },
+  { kanji: "乗る", kana: "のる", meaning: "naik (kendaraan)", group: "godan", masu: { k: "乗ります", h: "のります" }, te: { k: "乗って", h: "のって" }, ta: { k: "乗った", h: "のった" }, nai: { k: "乗らない", h: "のらない" } },
+  { kanji: "作る", kana: "つくる", meaning: "membuat", group: "godan", masu: { k: "作ります", h: "つくります" }, te: { k: "作って", h: "つくって" }, ta: { k: "作った", h: "つくった" }, nai: { k: "作らない", h: "つくらない" } },
+  { kanji: "死ぬ", kana: "しぬ", meaning: "mati", group: "godan", masu: { k: "死にます", h: "しにます" }, te: { k: "死んで", h: "しんで" }, ta: { k: "死んだ", h: "しんだ" }, nai: { k: "死なない", h: "しなない" } },
+  { kanji: "呼ぶ", kana: "よぶ", meaning: "memanggil", group: "godan", masu: { k: "呼びます", h: "よびます" }, te: { k: "呼んで", h: "よんで" }, ta: { k: "呼んだ", h: "よんだ" }, nai: { k: "呼ばない", h: "よばない" } },
+  { kanji: "遊ぶ", kana: "あそぶ", meaning: "bermain", group: "godan", masu: { k: "遊びます", h: "あそびます" }, te: { k: "遊んで", h: "あそんで" }, ta: { k: "遊んだ", h: "あそんだ" }, nai: { k: "遊ばない", h: "あそばない" } },
+  { kanji: "飲む", kana: "のむ", meaning: "minum", group: "godan", masu: { k: "飲みます", h: "のみます" }, te: { k: "飲んで", h: "のんで" }, ta: { k: "飲んだ", h: "のんだ" }, nai: { k: "飲まない", h: "のまない" } },
+  { kanji: "読む", kana: "よむ", meaning: "membaca", group: "godan", masu: { k: "読みます", h: "よみます" }, te: { k: "読んで", h: "よんで" }, ta: { k: "読んだ", h: "よんだ" }, nai: { k: "読まない", h: "よまない" } },
+  { kanji: "休む", kana: "やすむ", meaning: "istirahat", group: "godan", masu: { k: "休みます", h: "やすみます" }, te: { k: "休んで", h: "やすんで" }, ta: { k: "休んだ", h: "やすんだ" }, nai: { k: "休まない", h: "やすまない" } },
+  { kanji: "食べる", kana: "たべる", meaning: "makan", group: "ichidan", masu: { k: "食べます", h: "たべます" }, te: { k: "食べて", h: "たべて" }, ta: { k: "食べた", h: "たべた" }, nai: { k: "食べない", h: "たべない" } },
+  { kanji: "見る", kana: "みる", meaning: "melihat", group: "ichidan", masu: { k: "見ます", h: "みます" }, te: { k: "見て", h: "みて" }, ta: { k: "見た", h: "みた" }, nai: { k: "見ない", h: "みない" } },
+  { kanji: "起きる", kana: "おきる", meaning: "bangun", group: "ichidan", masu: { k: "起きます", h: "おきます" }, te: { k: "起きて", h: "おきて" }, ta: { k: "起きた", h: "おきた" }, nai: { k: "起きない", h: "おきない" } },
+  { kanji: "寝る", kana: "ねる", meaning: "tidur", group: "ichidan", masu: { k: "寝ます", h: "ねます" }, te: { k: "寝て", h: "ねて" }, ta: { k: "寝た", h: "ねた" }, nai: { k: "寝ない", h: "ねない" } },
+  { kanji: "教える", kana: "おしえる", meaning: "mengajar", group: "ichidan", masu: { k: "教えます", h: "おしえます" }, te: { k: "教えて", h: "おしえて" }, ta: { k: "教えた", h: "おしえた" }, nai: { k: "教えない", h: "おしえない" } },
+  { kanji: "覚える", kana: "おぼえる", meaning: "menghafal", group: "ichidan", masu: { k: "覚えます", h: "おぼえます" }, te: { k: "覚えて", h: "おぼえて" }, ta: { k: "覚えた", h: "おぼえた" }, nai: { k: "覚えない", h: "おぼえない" } },
+  { kanji: "開ける", kana: "あける", meaning: "membuka", group: "ichidan", masu: { k: "開けます", h: "あけます" }, te: { k: "開けて", h: "あけて" }, ta: { k: "開けた", h: "あけた" }, nai: { k: "開けない", h: "あけない" } },
+  { kanji: "閉める", kana: "しめる", meaning: "menutup", group: "ichidan", masu: { k: "閉めます", h: "しめます" }, te: { k: "閉めて", h: "しめて" }, ta: { k: "閉めた", h: "しめた" }, nai: { k: "閉めない", h: "しめない" } },
+  { kanji: "出かける", kana: "でかける", meaning: "pergi keluar", group: "ichidan", masu: { k: "出かけます", h: "でかけます" }, te: { k: "出かけて", h: "でかけて" }, ta: { k: "出かけた", h: "でかけた" }, nai: { k: "出かけない", h: "でかけない" } },
+  { kanji: "借りる", kana: "かりる", meaning: "meminjam", group: "ichidan", masu: { k: "借ります", h: "かります" }, te: { k: "借りて", h: "かりて" }, ta: { k: "借りた", h: "かりた" }, nai: { k: "借りない", h: "かりない" } },
+  { kanji: "する", kana: "する", meaning: "melakukan", group: "irregular", masu: { k: "します", h: "します" }, te: { k: "して", h: "して" }, ta: { k: "した", h: "した" }, nai: { k: "しない", h: "しない" } },
+  { kanji: "来る", kana: "くる", meaning: "datang", group: "irregular", masu: { k: "来ます", h: "きます" }, te: { k: "来て", h: "きて" }, ta: { k: "来た", h: "きた" }, nai: { k: "来ない", h: "こない" } },
+  { kanji: "勉強する", kana: "べんきょうする", meaning: "belajar", group: "irregular", masu: { k: "勉強します", h: "べんきょうします" }, te: { k: "勉強して", h: "べんきょうして" }, ta: { k: "勉強した", h: "べんきょうした" }, nai: { k: "勉強しない", h: "べんきょうしない" } },
+];
+
 /* =========================== PERSISTENSI =========================== */
 const PKEY = "minna-n5-progress";
 const emptyProgress = { vocab: {}, kanji: {}, best: 0, srs: {} };
@@ -695,6 +740,70 @@ function GrammarTab() {
   );
 }
 
+/* =========================== KONJUGASI =========================== */
+function ConjCell({ k, h }) {
+  return (
+    <td style={{ padding: "10px 12px", whiteSpace: "nowrap" }}>
+      <div style={{ fontFamily: FONT_DISPLAY, fontSize: 17, color: C.ink }}>{k}</div>
+      <div style={{ fontFamily: FONT_BODY, fontSize: 11, color: C.indigo2 }}>{h}</div>
+    </td>
+  );
+}
+function KonjugasiTab() {
+  const [group, setGroup] = useState("all");
+  const groups = [["all", "Semua"], ["godan", "Godan"], ["ichidan", "Ichidan"], ["irregular", "Tidak beraturan"]];
+  const list = group === "all" ? VERB_CONJ : VERB_CONJ.filter((v) => v.group === group);
+  return (
+    <div>
+      <SectionHead jp="活用" title="Konjugasi Kata Kerja" sub="Tabel perubahan bentuk kamus → ます → て → た → ない, lengkap kanji & hiragana. Berlatih di tab Latihan (kategori Konjugasi)." />
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
+        {groups.map(([g, label]) => (
+          <button key={g} onClick={() => setGroup(g)}
+            style={{ fontFamily: FONT_BODY, fontSize: 12.5, padding: "6px 13px", borderRadius: 999, cursor: "pointer",
+              border: `1px solid ${group === g ? C.indigo : C.line}`, background: group === g ? C.indigo : "transparent",
+              color: group === g ? C.paper : C.indigo, transition: "all .15s" }}>{label}</button>
+        ))}
+      </div>
+      {group !== "all" && (
+        <div style={{ fontFamily: FONT_BODY, fontSize: 13, color: C.ink, lineHeight: 1.7, background: C.paper2, border: `1px solid ${C.line}`, borderRadius: 5, padding: "12px 16px", marginBottom: 18 }}>
+          {GROUP_INFO[group].desc}
+        </div>
+      )}
+      <div style={{ overflowX: "auto", border: `1px solid ${C.line}`, borderRadius: 6 }}>
+        <table style={{ borderCollapse: "collapse", width: "100%", minWidth: 680 }}>
+          <thead>
+            <tr style={{ background: C.paper2 }}>
+              {["Kamus", "ます", "て", "た", "ない", "Arti"].map((h) => (
+                <th key={h} style={{ fontFamily: FONT_BODY, fontSize: 11, color: C.indigo2, textTransform: "uppercase", letterSpacing: 1, textAlign: "left", padding: "10px 12px", borderBottom: `1px solid ${C.line}` }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {list.map((v, i) => (
+              <tr key={v.kanji} style={{ borderTop: i ? `1px solid ${C.lineSoft}` : "none" }}>
+                <td style={{ padding: "10px 12px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <SpeakBtn text={v.kana} size={26} />
+                    <div>
+                      <div style={{ fontFamily: FONT_DISPLAY, fontSize: 19, color: C.ink }}>{v.kanji}</div>
+                      <div style={{ fontFamily: FONT_BODY, fontSize: 11, color: C.indigo2 }}>{v.kana}</div>
+                    </div>
+                  </div>
+                </td>
+                <ConjCell k={v.masu.k} h={v.masu.h} />
+                <ConjCell k={v.te.k} h={v.te.h} />
+                <ConjCell k={v.ta.k} h={v.ta.h} />
+                <ConjCell k={v.nai.k} h={v.nai.h} />
+                <td style={{ padding: "10px 12px", fontFamily: FONT_BODY, fontSize: 12.5, color: C.indigo }}>{v.meaning}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 /* =========================== LATIHAN (kuis) =========================== */
 function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
 
@@ -702,18 +811,26 @@ function buildQuiz(cat, count) {
   const vPool = LESSONS.flatMap((l) => l.words.map((w) => ({ prompt: w.jp, sub: "Apa artinya?", answer: w.id, speak: w.jp })));
   const kPool = KANJI.map((k) => ({ prompt: k.k, sub: "Apa artinya?", answer: k.id, speak: k.k }));
   const gPool = GRAMMAR.map((g) => ({ prompt: g.quiz.q, sub: "Lengkapi bagian yang kosong", answer: g.quiz.ans, options: shuffle([g.quiz.ans, ...g.quiz.opt.filter((o) => o !== g.quiz.ans)]).slice(0, 4), why: g.quiz.why }));
+  const teForms = VERB_CONJ.map((v) => v.te.k);
+  const taForms = VERB_CONJ.map((v) => v.ta.k);
+  const cPool = VERB_CONJ.flatMap((v) => [
+    { prompt: v.kanji, sub: `Ubah "${v.kana}" (${v.meaning}) ke bentuk ～て`, answer: v.te.k, speak: v.kana, formPool: teForms },
+    { prompt: v.kanji, sub: `Ubah "${v.kana}" (${v.meaning}) ke bentuk ～た (lampau)`, answer: v.ta.k, speak: v.kana, formPool: taForms },
+  ]);
   let pool;
   if (cat === "kosakata") pool = vPool;
   else if (cat === "kanji") pool = kPool;
   else if (cat === "grammar") pool = gPool;
-  else pool = [...vPool, ...kPool, ...gPool];
+  else if (cat === "konjugasi") pool = cPool;
+  else pool = [...vPool, ...kPool, ...gPool, ...cPool];
 
   const meaningPool = [...vPool, ...kPool].map((x) => x.answer);
   const n = Math.min(count || 10, pool.length);
   const picks = shuffle(pool).slice(0, n);
   return picks.map((item) => {
     if (item.options) return item;
-    const distract = shuffle(meaningPool.filter((m) => m !== item.answer)).slice(0, 3);
+    const basePool = item.formPool || meaningPool;
+    const distract = shuffle(basePool.filter((m) => m !== item.answer)).slice(0, 3);
     return { ...item, options: shuffle([item.answer, ...distract]) };
   });
 }
@@ -735,7 +852,7 @@ function Latihan({ progress, setBest }) {
   };
 
   if (!quiz) {
-    const cats = [["campur", "Campur semua"], ["kosakata", "Kosakata"], ["kanji", "Kanji"], ["grammar", "Tata Bahasa"]];
+    const cats = [["campur", "Campur semua"], ["kosakata", "Kosakata"], ["kanji", "Kanji"], ["grammar", "Tata Bahasa"], ["konjugasi", "Konjugasi (～te/～ta)"]];
     const counts = [5, 10, 15, 20];
     return (
       <div>
@@ -912,6 +1029,7 @@ const TABS = [
   { id: "kanji", label: "Kanji", jp: "漢字" },
   { id: "tulis", label: "Menulis", jp: "書" },
   { id: "grammar", label: "Tata Bahasa", jp: "文" },
+  { id: "konjugasi", label: "Konjugasi", jp: "活" },
   { id: "latihan", label: "Latihan", jp: "練" },
   { id: "srs", label: "Ulangi", jp: "復" },
 ];
@@ -990,6 +1108,7 @@ export default function App() {
             {tab === "kanji" && <KanjiTab progress={progress} mark={mark} />}
             {tab === "tulis" && <TulisTab progress={progress} mark={mark} />}
             {tab === "grammar" && <GrammarTab />}
+            {tab === "konjugasi" && <KonjugasiTab />}
             {tab === "latihan" && <Latihan progress={progress} setBest={setBest} />}
             {tab === "srs" && <SRSTab items={items} progress={progress} reviewItem={reviewItem} />}
           </>
