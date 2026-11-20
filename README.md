@@ -9,13 +9,6 @@ Dibuat dengan **Vite + React**. Progres belajar tersimpan otomatis di browser
 
 Butuh Node.js 18+.
 
-```bash
-npm install
-npm run dev      # buka http://localhost:5173
-npm run build    # hasil produksi ke folder dist/
-npm run preview  # pratinjau hasil build
-```
-
 ## Deploy ke Vercel
 
 ### Cara 1 — lewat GitHub (paling mudah)
